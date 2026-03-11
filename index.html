@@ -1,91 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dra. Rita María Restrepo | Dermatóloga U.P.B.</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="bg-slate-50 text-gray-800">
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const diasPrueba = 15;
+        const fechaInicio = localStorage.getItem('fecha_registro_dra');
+        const ahora = new Date().getTime();
 
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-blue-700">Dra. Rita Restrepo</div>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#inicio" class="hover:text-blue-600 transition">Inicio</a>
-                <a href="#servicios" class="hover:text-blue-600 transition">Servicios</a>
-                <a href="#contacto" class="hover:text-blue-600 transition">Contacto</a>
-                <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Agendar Cita</a>
-            </div>
-        </div>
-    </nav>
+        if (!fechaInicio) {
+            // Si es la primera vez que entra, guardamos la fecha actual
+            localStorage.setItem('fecha_registro_dra', ahora);
+        } else {
+            // Calculamos la diferencia en días
+            const diferenciaMs = ahora - parseInt(fechaInicio);
+            const diasTranscurridos = diferenciaMs / (1000 * 60 * 60 * 24);
 
-    <section id="inicio" class="container mx-auto px-6 py-16 flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 mb-10 md:mb-0">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
-                Cuidamos la salud de tu piel
-            </h1>
-            <p class="text-xl text-gray-600 mb-6 leading-relaxed">
-                Dra. Rita María Restrepo, especialista en Dermatología de la **U.P.B.**, dedicada a ofrecer soluciones integrales en salud cutánea y estética.
-            </p>
-            <div class="flex gap-4">
-                <a href="#contacto" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-700 transition">Consultar Ahora</a>
-                <a href="#servicios" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition">Ver Servicios</a>
-            </div>
-        </div>
-        <div class="md:w-1/2 flex justify-center">
-            <div class="relative">
-                <div class="absolute -inset-4 bg-blue-100 rounded-full blur-2xl opacity-50"></div>
-                <img src="https://via.placeholder.com/400x400" alt="Dra. Rita Restrepo" class="relative rounded-2xl shadow-2xl w-80 h-auto border-8 border-white">
-            </div>
-        </div>
-    </section>
-
-    <section id="servicios" class="bg-white py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-12">Nuestras Especialidades</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 border border-gray-100 rounded-2xl bg-slate-50 hover:shadow-xl transition">
-                    <i class="fa-solid fa-microscope text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Dermatología Clínica</h3>
-                    <p class="text-gray-600">Diagnóstico y tratamiento de acné, dermatitis, psoriasis y cáncer de piel.</p>
-                </div>
-                <div class="p-8 border border-gray-100 rounded-2xl bg-slate-50 hover:shadow-xl transition">
-                    <i class="fa-solid fa-sparkles text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Dermatología Estética</h3>
-                    <p class="text-gray-600">Procedimientos rejuvenecedores, toxina botulínica y peelings avanzados.</p>
-                </div>
-                <div class="p-8 border border-gray-100 rounded-2xl bg-slate-50 hover:shadow-xl transition">
-                    <i class="fa-solid fa-user-doctor text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Consultoría U.P.B.</h3>
-                    <p class="text-gray-600">Respaldo académico y profesional de la Universidad Pontificia Bolivariana.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contacto" class="container mx-auto px-6 py-20">
-        <div class="bg-blue-900 rounded-3xl p-8 md:p-16 text-white flex flex-col md:flex-row justify-between items-center">
-            <div>
-                <h2 class="text-3xl font-bold mb-4">¿Listo para mejorar tu piel?</h2>
-                <p class="text-blue-100 text-lg mb-6">Ubicada en Caucasia, Antioquia.</p>
-                <ul class="space-y-3">
-                    <li><i class="fa-solid fa-phone mr-2"></i> +57 (300) 123 4567</li>
-                    <li><i class="fa-solid fa-location-dot mr-2"></i> Caucasia, Antioquia, Colombia</li>
-                </ul>
-            </div>
-            <div class="mt-8 md:mt-0">
-                <a href="https://wa.me/tu-numero-aqui" class="bg-green-500 hover:bg-green-600 px-10 py-4 rounded-full text-lg font-bold flex items-center shadow-lg transition">
-                    <i class="fa-brands fa-whatsapp mr-3 text-2xl"></i> Contactar por WhatsApp
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="text-center py-10 text-gray-500 text-sm">
-        &copy; 2026 Dra. Rita María Restrepo - Todos los derechos reservados.
-    </footer>
-
-</body>
-</html>
+            if (diasTranscurridos > diasPrueba) {
+                // Bloqueo de la página
+                document.body.innerHTML = `
+                    <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: sans-serif; background: #f8fafc; text-align: center; padding: 20px;">
+                        <h1 style="color: #1e40af; font-size: 2rem; margin-bottom: 1rem;">Período de mantenimiento requerido</h1>
+                        <p style="color: #64748b; font-size: 1.1rem;">El acceso a este portal ha expirado. Por favor, contacte al administrador para renovar el servicio.</p>
+                        <div style="margin-top: 2rem; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; color: #94a3b8;">
+                            ID de Cliente: DRA-RMR-001
+                        </div>
+                    </div>
+                `;
+                document.body.style.overflow = "hidden";
+            }
+        }
+    });
+</script>
