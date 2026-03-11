@@ -1,30 +1,58 @@
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const diasPrueba = 15;
-        const fechaInicio = localStorage.getItem('fecha_registro_dra');
-        const ahora = new Date().getTime();
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Rita María Restrepo | Dermatóloga U.P.B.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-gray-800">
 
-        if (!fechaInicio) {
-            // Si es la primera vez que entra, guardamos la fecha actual
-            localStorage.setItem('fecha_registro_dra', ahora);
-        } else {
-            // Calculamos la diferencia en días
-            const diferenciaMs = ahora - parseInt(fechaInicio);
-            const diasTranscurridos = diferenciaMs / (1000 * 60 * 60 * 24);
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-700">Dra. Rita Restrepo</div>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#inicio" class="hover:text-blue-600">Inicio</a>
+                <a href="#servicios" class="hover:text-blue-600">Servicios</a>
+                <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Agendar Cita</a>
+            </div>
+        </div>
+    </nav>
 
-            if (diasTranscurridos > diasPrueba) {
-                // Bloqueo de la página
-                document.body.innerHTML = `
-                    <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: sans-serif; background: #f8fafc; text-align: center; padding: 20px;">
-                        <h1 style="color: #1e40af; font-size: 2rem; margin-bottom: 1rem;">Período de mantenimiento requerido</h1>
-                        <p style="color: #64748b; font-size: 1.1rem;">El acceso a este portal ha expirado. Por favor, contacte al administrador para renovar el servicio.</p>
-                        <div style="margin-top: 2rem; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; color: #94a3b8;">
-                            ID de Cliente: DRA-RMR-001
-                        </div>
-                    </div>
-                `;
-                document.body.style.overflow = "hidden";
+    <section id="inicio" class="container mx-auto px-6 py-16 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10">
+            <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Cuidamos la salud de tu piel</h1>
+            <p class="text-xl text-gray-600 mb-6">Dra. Rita María Restrepo, especialista de la <b>U.P.B.</b></p>
+            <a href="https://wa.me/573000000000" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold shadow-lg">WhatsApp Directo</a>
+        </div>
+        <div class="md:w-1/2">
+            <img src="https://via.placeholder.com/400" alt="Dra. Rita Restrepo" class="rounded-2xl shadow-2xl border-8 border-white mx-auto">
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            const diasLimite = 15;
+            const key = 'app_v_status';
+            const ahora = new Date().getTime();
+            let fechaInicio = localStorage.getItem(key);
+
+            if (!fechaInicio) {
+                localStorage.setItem(key, ahora);
+            } else {
+                const transcurrido = (ahora - parseInt(fechaInicio)) / (1000 * 60 * 60 * 24);
+                if (transcurrido > diasLimite) {
+                    document.body.innerHTML = `
+                        <div style="height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; font-family:sans-serif; background:#f1f5f9;">
+                            <h1 style="color:#1e3a8a;">Suscripción Expirada</h1>
+                            <p>El período de prueba de 15 días ha finalizado.</p>
+                            <p style="margin-top:20px; color:#64748b;">Contacte al desarrollador para renovar el acceso.</p>
+                        </div>`;
+                    window.stop();
+                }
             }
-        }
-    });
-</script>
+        })();
+    </script>
+</body>
+</html>
